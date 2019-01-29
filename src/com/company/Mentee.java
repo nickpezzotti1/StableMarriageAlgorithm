@@ -2,7 +2,7 @@ package com.company;
 
 public class Mentee {
     private static final int AGE_WEIGHT = 1;
-    private static final int SEX_WEIGHT = 3;
+    private static final int SEX_WEIGHT = 0;
     private int id;
     private int age;
     private boolean isMale;
@@ -13,7 +13,6 @@ public class Mentee {
         this.age = age;
         this.isMale = isMale;
         this.id = id;
-
     }
 
     public int getId() {

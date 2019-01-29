@@ -3,6 +3,7 @@ package com.company;
 import java.util.*;
 
 public class MatchingAlgorithm {
+
     /**
      * Mentees are men in stable marriage problem. mentors are women (getting proposed to).
      * TODO:
@@ -16,31 +17,26 @@ public class MatchingAlgorithm {
         HashMap<Mentee, ArrayList<Mentor>> menteePreferences = new HashMap<>();
         HashMap<Mentor, ArrayList<Mentee>> mentorPreferences = new HashMap<>();
 
+        // generate preferences for mentees
         for (Mentee mentee : mentees) {
-            TreeMap<Integer, Mentor> preferences = new TreeMap<>();
+            ArrayList<Mentor> preferences = new ArrayList<>();
             for (Mentor mentor : mentors) {
-                preferences.put(mentee.getScore(mentor), mentor);
+                preferences.add(mentor);
             }
-            ArrayList<Mentor> mentorsTheyWant = new ArrayList<>();
-            preferences.forEach((k, v) -> mentorsTheyWant.add(v));
+            preferences.sort((a, b) -> ((Integer)mentee.getScore(a)).compareTo((mentee.getScore(b))));
 
-            Collections.reverse(mentorsTheyWant);
-
-            menteePreferences.put(mentee, mentorsTheyWant);
+            menteePreferences.put(mentee, preferences);
         }
 
-        //generate for mentors
+        //generate preferences for mentors
         for (Mentor mentor : mentors) {
-            TreeMap<Integer, Mentee> preferences = new TreeMap<>();
+            ArrayList<Mentee> preferences = new ArrayList<>();
             for (Mentee mentee : mentees) {
-                preferences.put(mentor.getScore(mentee), mentee);
+                preferences.add(mentee);
             }
-            ArrayList<Mentee> menteesTheyWant = new ArrayList<>();
-            preferences.forEach((k, v) -> menteesTheyWant.add(v));
+            preferences.sort((a, b) -> ((Integer)mentor.getScore(a)).compareTo((mentor.getScore(b))));
 
-            Collections.reverse(menteesTheyWant);
-
-            mentorPreferences.put(mentor, menteesTheyWant);
+            mentorPreferences.put(mentor, preferences);
         }
 
         while(existFreeMentees(menteePreferences)){ // looping until proposers exist
@@ -49,19 +45,18 @@ public class MatchingAlgorithm {
             for (int i = 0; i < menteePreferences.get(proposer).size(); i++) {
                 Mentor candidate = menteePreferences.get(proposer).get(i);
 
-                if (!candidate.hasMentee()) {
-                    candidate.setMentee(proposer);
+                if (candidate.isNotFull()) {
+                    candidate.addMentee(proposer);
                     proposer.setMentor(candidate);
                     break;
-                } else if (candidate.prefers(proposer)) {
-                    candidate.getMentee().setMentor(null); // unengage
+                } else if (candidate.prefersToLeast(proposer)) {
+                    candidate.getLeastPreferredMentee().setMentor(null); // unengage
 
-                    candidate.setMentee(proposer);
+                    candidate.removeLeastPreferredMentee();
+
+                    candidate.addMentee(proposer);
                     proposer.setMentor(candidate);
                     break;
-                }
-                else {
-                    System.out.println();
                 }
             }
         }
@@ -69,6 +64,11 @@ public class MatchingAlgorithm {
         return writeToJson(mentees);
     }
 
+    /**
+     * Format a json string containing a list of mentee/mentor pairs
+     * @param mentees the list of all mentees to be matched
+     * @return a string of the json formatted pairs
+     */
     private static String writeToJson(ArrayList<Mentee> mentees) {
         String json = "{ \"assignments\": [ ";
         for (Mentee mentee : mentees) {
@@ -105,13 +105,15 @@ public class MatchingAlgorithm {
 
     public static void main(String[] args) {
         // dummy data
-        Mentor a = new Mentor(20, true, 0);
-        Mentor b = new Mentor(15, true, 1);
-        Mentor c = new Mentor(10, true, 2);
+        Mentor a = new Mentor(20, true, 0, 2);
+        Mentor b = new Mentor(15, true, 1, 1);
+        Mentor c = new Mentor(10, true, 2, 1);
 
         Mentee d = new Mentee(18, true, 3);
         Mentee e = new Mentee(19, true, 4);
         Mentee f = new Mentee(12, true, 5);
+        Mentee g = new Mentee(20, true, 6);
+        //Mentee h = new Mentee(21, true, 7);
 
         ArrayList<Mentor> mentors = new ArrayList<>();
         mentors.add(a);
@@ -122,6 +124,8 @@ public class MatchingAlgorithm {
         mentees.add(d);
         mentees.add(e);
         mentees.add(f);
+        mentees.add(g);
+        //mentees.add(h);
 
         System.out.println(match(mentors, mentees));
     }
