@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Mentor {
+public class Mentor extends Person {
 
     private static final int AGE_WEIGHT = 1;
     private static final int SEX_WEIGHT = 0;

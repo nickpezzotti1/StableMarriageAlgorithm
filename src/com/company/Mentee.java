@@ -1,6 +1,6 @@
 package com.company;
 
-public class Mentee {
+public class Mentee extends Person {
     private static final int AGE_WEIGHT = 1;
     private static final int SEX_WEIGHT = 0;
     private int id;
