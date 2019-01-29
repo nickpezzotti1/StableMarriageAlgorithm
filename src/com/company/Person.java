@@ -1,19 +1,12 @@
 package com.company;
 
 public class Person {
-    private static final int AGE_WEIGHT = 1;
-    private static final int SEX_WEIGHT = 0;
+    public static final int AGE_WEIGHT = 1;
+    public static final int SEX_WEIGHT = 0;
+
     private int id;
     private int age;
     private boolean isMale;
-
-    public static int getAgeWeight() {
-        return AGE_WEIGHT;
-    }
-
-    public static int getSexWeight() {
-        return SEX_WEIGHT;
-    }
 
     public int getId() {
         return id;
@@ -38,8 +31,8 @@ public class Person {
     public int getScore(Person other) {
         int score = 0;
 
-        score -= -(Math.abs( this.getAge() - other.getAge())) * this.getAgeWeight();
-        if ( this.isMale() == other.isMale()) score += getSexWeight();
+        score -= -(Math.abs( this.getAge() - other.getAge())) * AGE_WEIGHT;
+        if ( this.isMale() == other.isMale()) score += SEX_WEIGHT;
 
         return score;
     }
