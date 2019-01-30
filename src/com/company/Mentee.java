@@ -23,8 +23,8 @@ public class Mentee extends Person {
 
     public int getScore(Mentor mentor) {
         int score = 0;
-
-        score -= -(Math.abs( getAge() - mentor.getAge()))* getAgeWeight();
+      
+        score += -(Math.abs( getAge() - mentor.getAge()))* getAgeWeight();
         if ( isMale() == mentor.isMale()) score += getSexWeight();
 
         return score;
