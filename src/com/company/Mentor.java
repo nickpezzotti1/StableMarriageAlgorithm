@@ -2,42 +2,14 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Mentor {
+public class Mentor extends User {
 
-    private static final int AGE_WEIGHT = 1;
-    private static final int SEX_WEIGHT = 0;
-    private int id;
-    private int age;
-    private boolean isMale;
-    private int menteeLimit;
-
+    private int menteeLimit; // the number of mentees he can mentor
     private ArrayList<Mentee> mentees = new ArrayList<>();
 
     public Mentor(int age, boolean isMale, int id, int menteeLimit) {
-        this.age = age;
-        this.isMale = isMale;
-        this.id = id;
+        super(age, isMale, id);
         this.menteeLimit = menteeLimit;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public boolean isMale() {
-        return isMale;
-    }
-
-    public void setMale(boolean male) {
-        isMale = male;
     }
 
     public void addMentee(Mentee mentee) {
@@ -68,10 +40,13 @@ public class Mentor {
         return score;
     }
 
-    public boolean prefersToLeast(Mentee other) {
+    public boolean prefersToLeastWantedMentee(Mentee other) {
         return getScore(mentees.get(0)) < getScore(other);
     }
 
+    /**
+     * @return True if the mentor still hasn't reached its capacity of mentees.
+     */
     public boolean isNotFull() {
         return mentees.size() < menteeLimit;
     }

@@ -5,12 +5,14 @@ import java.util.*;
 public class MatchingAlgorithm {
 
     /**
-     * Mentees are men in stable marriage problem. mentors are women (getting proposed to).
-     * TODO:
-     *      - Only one mentor to mentee
+     * Computation of the stable marriage algorithm. It is an adapted variant of
+     * the Gale-Shapely algorithm to allow one woman to accept multiple men (one
+     * mentor can accept multiple mentees).
+     *
+     * TODO ASSUMPTIONS:
      *      - more mentors than mentees
-     * @param mentors
-     * @param mentees
+     * @param mentors The men in the algorithm.
+     * @param mentees The women.
      */
     private static String match(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
         // initialize preferences
@@ -23,7 +25,7 @@ public class MatchingAlgorithm {
             for (Mentor mentor : mentors) {
                 preferences.add(mentor);
             }
-            preferences.sort((a, b) -> ((Integer)mentee.getScore(a)).compareTo((mentee.getScore(b))));
+            preferences.sort((a, b) -> ((Integer)mentee.getScore(b)).compareTo((mentee.getScore(a))));
 
             menteePreferences.put(mentee, preferences);
         }
@@ -34,7 +36,7 @@ public class MatchingAlgorithm {
             for (Mentee mentee : mentees) {
                 preferences.add(mentee);
             }
-            preferences.sort((a, b) -> ((Integer)mentor.getScore(a)).compareTo((mentor.getScore(b))));
+            preferences.sort((a, b) -> ((Integer)mentor.getScore(b)).compareTo((mentor.getScore(a))));
 
             mentorPreferences.put(mentor, preferences);
         }
@@ -49,7 +51,7 @@ public class MatchingAlgorithm {
                     candidate.addMentee(proposer);
                     proposer.setMentor(candidate);
                     break;
-                } else if (candidate.prefersToLeast(proposer)) {
+                } else if (candidate.prefersToLeastWantedMentee(proposer)) {
                     candidate.getLeastPreferredMentee().setMentor(null); // unengage
 
                     candidate.removeLeastPreferredMentee();
@@ -112,8 +114,7 @@ public class MatchingAlgorithm {
         Mentee d = new Mentee(18, true, 3);
         Mentee e = new Mentee(19, true, 4);
         Mentee f = new Mentee(12, true, 5);
-        Mentee g = new Mentee(20, true, 6);
-        //Mentee h = new Mentee(21, true, 7);
+        Mentee h = new Mentee(20, true, 7);
 
         ArrayList<Mentor> mentors = new ArrayList<>();
         mentors.add(a);
@@ -124,8 +125,7 @@ public class MatchingAlgorithm {
         mentees.add(d);
         mentees.add(e);
         mentees.add(f);
-        mentees.add(g);
-        //mentees.add(h);
+        mentees.add(h);
 
         System.out.println(match(mentors, mentees));
     }
