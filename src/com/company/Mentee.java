@@ -50,7 +50,7 @@ public class Mentee {
     public int getScore(Mentor mentor) {
         int score = 0;
 
-        score -= -(Math.abs(age - mentor.getAge()))*AGE_WEIGHT;
+        score += -(Math.abs(age - mentor.getAge()))*AGE_WEIGHT;
         if (isMale = mentor.isMale()) score += SEX_WEIGHT;
 
         return score;
