@@ -1,5 +1,10 @@
 package com.company;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class MatchingAlgorithm {
@@ -47,7 +52,7 @@ public class MatchingAlgorithm {
             for (int i = 0; i < menteePreferences.get(proposer).size(); i++) {
                 Mentor candidate = menteePreferences.get(proposer).get(i);
 
-                if (candidate.isNotFull()) {
+                 if (candidate.isNotFull()) {
                     candidate.addMentee(proposer);
                     proposer.setMentor(candidate);
                     break;
@@ -104,29 +109,53 @@ public class MatchingAlgorithm {
         return false;
     }
 
+    /**
+     * TODO checking data format (mentee limit > 0), make required fields and not required
+     * @param json
+     * @return
+     */
+    private static Map.Entry<ArrayList<Mentor>, ArrayList<Mentee>> fetchMentorsFromJson(String json) {
+        Map jsonRootObject = new Gson().fromJson(json, Map.class);
+
+        // get mentors
+        List<Map> mentorsJson = (List) jsonRootObject.get("mentors");
+        ArrayList<Mentor> mentors = new ArrayList<>();
+        for (Map mentor : mentorsJson) {
+            Mentor newMentor = new Mentor(((Number) mentor.get("age")).intValue(),
+                    (boolean) mentor.getOrDefault("isMale", false),
+                    ((Number) mentor.get("ID")).intValue(),
+                    ((Number) mentor.getOrDefault("menteeLimit", 1)).intValue());
+            mentors.add(newMentor);
+        }
+
+        // get mentees
+        List<Map> menteeJson = (List) jsonRootObject.get("mentees");
+        ArrayList<Mentee> mentees = new ArrayList<>();
+        for (Map mentee : menteeJson) {
+            Mentee newMentee = new Mentee(((Number) mentee.get("age")).intValue(),
+                    (boolean) mentee.get("isMale"),
+                    ((Number) mentee.get("ID")).intValue());
+            mentees.add(newMentee);
+        }
+
+        return new AbstractMap.SimpleEntry<>(mentors, mentees);
+    }
+
+    private static String match(String json) {
+        Map.Entry<ArrayList<Mentor>, ArrayList<Mentee>> inputs = fetchMentorsFromJson(json);
+
+        return match(inputs.getKey(), inputs.getValue());
+    }
 
     public static void main(String[] args) {
-        // dummy data
-        Mentor a = new Mentor(20, true, 0, 2);
-        Mentor b = new Mentor(15, true, 1, 1);
-        Mentor c = new Mentor(10, true, 2, 1);
+        String jsonRequestBody = null;
 
-        Mentee d = new Mentee(18, true, 3);
-        Mentee e = new Mentee(19, true, 4);
-        Mentee f = new Mentee(12, true, 5);
-        Mentee h = new Mentee(20, true, 7);
+        try {
+            jsonRequestBody = String.join("\n", Files.readAllLines(Paths.get("src/requestExample.txt"))) ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        ArrayList<Mentor> mentors = new ArrayList<>();
-        mentors.add(a);
-        mentors.add(b);
-        mentors.add(c);
-
-        ArrayList<Mentee> mentees = new ArrayList<>();
-        mentees.add(d);
-        mentees.add(e);
-        mentees.add(f);
-        mentees.add(h);
-
-        System.out.println(match(mentors, mentees));
+        System.out.println(match(jsonRequestBody));
     }
 }
