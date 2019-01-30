@@ -31,7 +31,7 @@ public class Person {
     public int getScore(Person other) {
         int score = 0;
 
-        score -= -(Math.abs( age - other.getAge())) * AGE_WEIGHT;
+        score += -(Math.abs( age - other.getAge())) * AGE_WEIGHT;
         if ( isMale == other.isMale()) score += SEX_WEIGHT;
 
         return score;
