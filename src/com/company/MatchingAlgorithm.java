@@ -19,7 +19,7 @@ public class MatchingAlgorithm {
      * @param mentors The men in the algorithm.
      * @param mentees The women.
      */
-    private static String match(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
+    public static String match(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
         // initialize preferences
         HashMap<Mentee, ArrayList<Mentor>> menteePreferences = new HashMap<>();
         HashMap<Mentor, ArrayList<Mentee>> mentorPreferences = new HashMap<>();
@@ -141,7 +141,7 @@ public class MatchingAlgorithm {
         return new AbstractMap.SimpleEntry<>(mentors, mentees);
     }
 
-    private static String match(String json) {
+    public static String match(String json) {
         Map.Entry<ArrayList<Mentor>, ArrayList<Mentee>> inputs = fetchMentorsFromJson(json);
 
         return match(inputs.getKey(), inputs.getValue());
