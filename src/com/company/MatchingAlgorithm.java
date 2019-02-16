@@ -77,12 +77,12 @@ public class MatchingAlgorithm {
      * @return a string of the json formatted pairs
      */
     private static String writeToJson(ArrayList<Mentee> mentees) {
-        String json = "{ assignments: [ ";
+        String json = "{ \"assignments\": [ ";
         for (Mentee mentee : mentees) {
             json += "{ ";
-            json += "mentee_id: " + mentee.getId() + ", ";
-            json += "mentor_id: " + mentee.getMentor().getId();
-            json += "}, ";
+            json += "\"mentee_id\": \"" + mentee.getId() + "\", ";
+            json += "\"mentor_id\": \"" + mentee.getMentor().getId();
+            json += "\"}, ";
         }
 
         // remove trailing comma
