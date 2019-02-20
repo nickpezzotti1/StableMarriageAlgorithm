@@ -1,0 +1,57 @@
+{
+	"mentors": [
+		{
+			"ID": 0,
+			"name": "name1",
+			"age": 20,
+			"isMale": true,
+			"menteeLimit": 2
+		},
+		{
+            "ID": 1,
+            "name": "name1",
+            "age": 15,
+            "isMale": true
+        },
+		{
+			"ID": 2,
+			"name": "name2",
+			"age": 10,
+			"isMale": true
+		}
+	],
+	"mentees": [
+		{
+			"ID": 3,
+			"name": "name1",
+			"age": 18,
+			"last name": "lastname2",
+			"specialization": "AI",
+			"isMale": true
+		},
+		{
+            "ID": 4,
+            "name": "name1",
+            "age": 19,
+            "last name": "lastname2",
+            "specialization": "AI",
+            "isMale": true
+        },
+        {
+            "ID": 5,
+            "name": "name1",
+            "age": 12,
+            "last name": "lastname2",
+            "specialization": "AI",
+            "isMale": true
+        },
+        {
+            "ID": 6,
+            "name": "name1",
+            "age": 10,
+            "last name": "lastname2",
+            "specialization": "AI",
+            "isMale": true
+        }
+	]
+}

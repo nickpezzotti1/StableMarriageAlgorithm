@@ -1,0 +1,12 @@
+{
+  "assignments": [
+   {
+   	"mentor_id": 123456,
+  	"mentee_id": 894537
+   },
+   {
+   	"mentor_id": 13456,
+  	"mentee_id": 89537
+   }
+  ]
+}

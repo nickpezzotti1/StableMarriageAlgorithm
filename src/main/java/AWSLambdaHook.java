@@ -18,7 +18,7 @@ public class AWSLambdaHook implements RequestHandler<Object, String> {
         for (Map mentor : mentorsJson) {
             Mentor newMentor = new Mentor(((Number) mentor.get("age")).intValue(),
                     (boolean) mentor.getOrDefault("isMale", false),
-                    (String) mentor.get("ID"),
+                    mentor.get("ID").toString(),
                     ((Number) mentor.getOrDefault("menteeLimit", 1)).intValue());
             mentors.add(newMentor);
         }
@@ -29,7 +29,7 @@ public class AWSLambdaHook implements RequestHandler<Object, String> {
         for (Map mentee : menteeJson) {
             Mentee newMentee = new Mentee(((Number) mentee.get("age")).intValue(),
                     (boolean) mentee.get("isMale"),
-                    (String) mentee.get("ID"));
+                    mentee.get("ID").toString());
             mentees.add(newMentee);
         }
 
