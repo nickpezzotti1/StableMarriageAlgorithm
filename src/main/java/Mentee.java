@@ -1,10 +1,8 @@
-package com.company;
-
 public class Mentee extends User {
 
     protected Mentor mentor; // this value is assigned from the algorithm
 
-    public Mentee(int age, boolean isMale, int id) {
+    public Mentee(int age, boolean isMale, String id) {
         super(age, isMale, id);
     }
 

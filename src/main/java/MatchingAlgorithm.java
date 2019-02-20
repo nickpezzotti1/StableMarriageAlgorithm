@@ -1,7 +1,4 @@
-package com.company;
-
 import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -123,7 +120,7 @@ public class MatchingAlgorithm {
         for (Map mentor : mentorsJson) {
             Mentor newMentor = new Mentor(((Number) mentor.get("age")).intValue(),
                     (boolean) mentor.getOrDefault("isMale", false),
-                    ((Number) mentor.get("ID")).intValue(),
+                    (String) mentor.get("ID"),
                     ((Number) mentor.getOrDefault("menteeLimit", 1)).intValue());
             mentors.add(newMentor);
         }
@@ -134,7 +131,7 @@ public class MatchingAlgorithm {
         for (Map mentee : menteeJson) {
             Mentee newMentee = new Mentee(((Number) mentee.get("age")).intValue(),
                     (boolean) mentee.get("isMale"),
-                    ((Number) mentee.get("ID")).intValue());
+                    ((String) mentee.get("ID")));
             mentees.add(newMentee);
         }
 

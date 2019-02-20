@@ -1,5 +1,3 @@
-package com.company;
-
 import java.util.ArrayList;
 
 public class Mentor extends User {
@@ -7,7 +5,7 @@ public class Mentor extends User {
     private int menteeLimit; // the number of mentees he can mentor
     private ArrayList<Mentee> mentees = new ArrayList<>();
 
-    public Mentor(int age, boolean isMale, int id, int menteeLimit) {
+    public Mentor(int age, boolean isMale, String id, int menteeLimit) {
         super(age, isMale, id);
         this.menteeLimit = menteeLimit;
     }

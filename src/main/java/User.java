@@ -1,5 +1,3 @@
-package com.company;
-
 /**
  * This class represents the general user. It will always be one of two types:
  * Mentor or Mentee, and therefore cannot be instatiated. This hierarchy is built
@@ -13,17 +11,17 @@ abstract public class User {
     protected static final int AGE_WEIGHT = 1;
     protected static final int SEX_WEIGHT = 0;
 
-    protected int id;
+    protected String id;
     protected int age;
     protected boolean isMale;
 
-    public User(int age, boolean isMale, int id) {
+    public User(int age, boolean isMale, String id) {
         this.age = age;
         this.isMale = isMale;
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
