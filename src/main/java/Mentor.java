@@ -4,6 +4,8 @@ import java.util.List;
 public class Mentor extends User {
 
     private int menteeLimit; // the number of mentees he can mentor
+
+    // A list of all the mentees the mentor is currently matched with
     private ArrayList<Mentee> mentees = new ArrayList<>();
 
     public Mentor(String id, int menteeLimit, Integer age, Boolean isMale, List<String> hobbies, List<String> interests) {
@@ -15,10 +17,19 @@ public class Mentor extends User {
         mentees.add(mentee);
     }
 
+    /**
+     * Remove the mentee the mentor prefers the least from their
+     * currently assigned mentees ("mentees" ArrayList)
+     */
     public void removeLeastPreferredMentee() {
         mentees.remove(getLeastPreferredMentee());
     }
 
+    /**
+     * Find the mentee the mentor prefers the least from their
+     * currently assigned mentees ("mentees" ArrayList)
+     * @return the least preferred mentee
+     */
     public Mentee getLeastPreferredMentee() {
         Mentee minMentee = mentees.get(0);
         for(Mentee m : mentees) {

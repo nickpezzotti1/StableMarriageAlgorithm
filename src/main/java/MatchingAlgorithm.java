@@ -22,7 +22,7 @@ public class MatchingAlgorithm {
      * @param mentors The men in the algorithm.
      * @param mentees The women.
      */
-    public static String match(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
+    private static ArrayList<Mentee> performMatch(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
         // initialize preferences
         HashMap<Mentee, ArrayList<Mentor>> menteePreferences = new HashMap<>();
         HashMap<Mentor, ArrayList<Mentee>> mentorPreferences = new HashMap<>();
@@ -49,7 +49,7 @@ public class MatchingAlgorithm {
             mentorPreferences.put(mentor, preferences);
         }
 
-        while(existFreeMentees(menteePreferences)){ // looping until proposers exist
+        while(existFreeMentees(menteePreferences.keySet())){ // looping until proposers exist
             Mentee proposer = getFirstAvailableMentee(menteePreferences.keySet());
 
             for (int i = 0; i < menteePreferences.get(proposer).size(); i++) {
@@ -71,7 +71,7 @@ public class MatchingAlgorithm {
             }
         }
 
-        return writeToJson(mentees);
+        return mentees;
     }
 
     /**
@@ -95,16 +95,26 @@ public class MatchingAlgorithm {
         return json;
     }
 
+    /**
+     * Get the first available mentee that hasn't been matched to a mentor
+     * @param mentees A set of the mentees
+     * @return The mentee which hasn't been matched - or null if all mentees are matched
+     */
     private static Mentee getFirstAvailableMentee(Set<Mentee> mentees) {
         for (Mentee mentee : mentees) {
             if (!mentee.hasMentor()) return mentee;
         }
-        System.out.println("Mentors expired");
+        System.out.println("Mentees expired");
         return null;
     }
 
-    private static boolean existFreeMentees(HashMap<Mentee, ArrayList<Mentor>> menteePreferences) {
-        for (Mentee mentee : menteePreferences.keySet()) {
+    /**
+     * Check if there is a mentee that does not have a mentor assigned
+     * @param mentees A set of the mentees
+     * @return true if a mentee is not matched otherwise false
+     */
+    private static boolean existFreeMentees(Set<Mentee> mentees) {
+        for (Mentee mentee : mentees) {
             if (!mentee.hasMentor()) {
                 return true;
             }
@@ -114,8 +124,9 @@ public class MatchingAlgorithm {
 
     /**
      * TODO checking data format (mentee limit > 0), make required fields and not required
-     * @param json
-     * @return
+     * Deserialise a json formatted string containing data for mentees and mentors
+     * @param json A json formatted string containing the mentee/mentor data
+     * @return a map entry of ArrayLists: key - mentors, value - mentees
      */
     private static Map.Entry<ArrayList<Mentor>, ArrayList<Mentee>> fetchMentorsFromJson(String json) {
         Map jsonRootObject = new Gson().fromJson(json, Map.class);
@@ -178,9 +189,24 @@ public class MatchingAlgorithm {
         return new AbstractMap.SimpleEntry<>(mentors, mentees);
     }
 
+    /**
+     * Match mentors to their mentees based on the json data provided
+     * @param json A json formatted list of mentors and mentees with their information
+     * @return A json formatted list of mentor-mentee assignments, paired by id
+     */
     public static String match(String json) {
         Map.Entry<ArrayList<Mentor>, ArrayList<Mentee>> inputs = fetchMentorsFromJson(json);
 
-        return match(inputs.getKey(), inputs.getValue());
+        return writeToJson(performMatch(inputs.getKey(), inputs.getValue()));
+    }
+
+    /**
+     * Match mentors to their mentees based on the data provided in the ArrayLists
+     * @param mentors the mentors to be matched
+     * @param mentees the mentees to be matched
+     * @return A json formatted list of mentor-mentee assignments, paired by id
+     */
+    public static String match(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
+        return writeToJson(performMatch(mentors, mentees));
     }
 }
