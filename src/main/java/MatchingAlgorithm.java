@@ -143,16 +143,4 @@ public class MatchingAlgorithm {
 
         return match(inputs.getKey(), inputs.getValue());
     }
-
-    public static void main(String[] args) {
-        String jsonRequestBody = null;
-
-        try {
-            jsonRequestBody = String.join("\n", Files.readAllLines(Paths.get("src/res/requestExample.txt"))) ;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(match(jsonRequestBody));
-    }
 }
