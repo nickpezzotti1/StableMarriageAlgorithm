@@ -29,8 +29,23 @@ public class MatchingAlgorithmTest {
         String expectedResponse = null;
 
         try {
-            jsonRequestBody = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test1/input.txt")));
-            expectedResponse = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test1/expected_output.txt")));
+            jsonRequestBody = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test2/input.txt")));
+            expectedResponse = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test2/expected_output.txt")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(expectedResponse, MatchingAlgorithm.match(jsonRequestBody));
+    }
+
+    @Test
+    public void testConfigParameters() {
+        String jsonRequestBody = null;
+        String expectedResponse = null;
+
+        try {
+            jsonRequestBody = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test3/input.txt")));
+            expectedResponse = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test3/expected_output.txt")));
         } catch (IOException e) {
             e.printStackTrace();
         }

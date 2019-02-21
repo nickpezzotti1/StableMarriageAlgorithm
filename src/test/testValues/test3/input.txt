@@ -1,37 +1,25 @@
 {
+  "configurations": {
+    "sex_importance": 100,
+    "age_importance": 0
+  },
   "mentors": [
     {
-      "ID": k1,
-      "age": 20,
-      "isMale": true,
+      "ID": "same_age",
+      "age": 18,
+      "isMale": false,
       "menteeLimit": 1
     },
     {
-      "ID": k4,
-      "age": 15,
-      "isMale": true,
-      "menteeLimit": 1
-    },
-    {
-      "ID": k5,
-      "age": 10,
+      "ID": "same_gender",
+      "age": 0,
       "isMale": true,
       "menteeLimit": 1
     }
   ],
   "mentees": [
     {
-      "ID": k98,
-      "age": 18,
-      "isMale": true
-    },
-    {
-      "ID": k987,
-      "age": 18,
-      "isMale": true
-    },
-    {
-      "ID": k876,
+      "ID": "k98",
       "age": 18,
       "isMale": true
     }

@@ -27,12 +27,12 @@
     },
     {
       "ID": "k987",
-      "age": 18,
+      "age": 19,
       "isMale": true
     },
     {
       "ID": "k876",
-      "age": 18,
+      "age": 20,
       "isMale": true
     }
   ]

@@ -5,6 +5,12 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class MatchingAlgorithm {
+    // these values are tuned to adjust importance give to parameters.
+    // The following are the default values if none are specified
+    public static int AGE_WEIGHT = 1;
+    public static int SEX_WEIGHT = 10;
+    public static int HOBBY_WEIGHT = 5;
+    public static int INTEREST_WEIGHT = 5;
 
     /**
      * Computation of the stable marriage algorithm. It is an adapted variant of
@@ -122,7 +128,7 @@ public class MatchingAlgorithm {
                     mentor.get("ID").toString(),
                     ((Number) mentor.getOrDefault("menteeLimit", 1)).intValue(),
                     ((Number) mentor.get("age")).intValue(),
-                    (Boolean) mentor.getOrDefault("isMale", null),
+                    (Boolean) mentor.get("isMale"),
                     (List<String>) mentor.get("hobbies"),
                     (List<String>) mentor.get("interests"));
             mentors.add(newMentor);
@@ -134,10 +140,39 @@ public class MatchingAlgorithm {
         for (Map mentee : menteeJson) {
             Mentee newMentee = new Mentee(mentee.get("ID").toString(),
                     ((Number) mentee.get("age")).intValue(),
-                    (Boolean) mentee.getOrDefault("isMale", null),
+                    (Boolean) mentee.get("isMale"),
                     (List<String>) mentee.get("hobbies"),
                     (List<String>) mentee.get("interests"));
             mentees.add(newMentee);
+        }
+
+        // parsing the config options
+        if (jsonRootObject.get("configurations") != null) {
+            Number sex_importance = (Number) ((Map) jsonRootObject.get("configurations")).get("sex_importance");
+            Number age_importance = (Number) ((Map) jsonRootObject.get("configurations")).get("age_importance");
+            Number hobbies_importance = (Number) ((Map) jsonRootObject.get("configurations")).get("hobbies_importance");
+            Number interests_importance = (Number) ((Map) jsonRootObject.get("configurations")).get("interests_importance");
+
+            if (sex_importance != null) {
+                SEX_WEIGHT = sex_importance.intValue();
+            }
+
+            if (age_importance != null) {
+                AGE_WEIGHT = age_importance.intValue();
+            }
+
+            if (hobbies_importance != null) {
+                HOBBY_WEIGHT = hobbies_importance.intValue();
+            }
+
+            if (interests_importance != null) {
+                INTEREST_WEIGHT = interests_importance.intValue();
+            }
+        } else { // set them to default
+            AGE_WEIGHT = 1;
+            SEX_WEIGHT = 10;
+            HOBBY_WEIGHT = 5;
+            INTEREST_WEIGHT = 5;
         }
 
         return new AbstractMap.SimpleEntry<>(mentors, mentees);
