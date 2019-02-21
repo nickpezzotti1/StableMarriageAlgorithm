@@ -16,7 +16,7 @@ public class MatchingAlgorithm {
      * @param mentors The men in the algorithm.
      * @param mentees The women.
      */
-    public static String match(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
+    public static ArrayList<Mentee> match(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
         // initialize preferences
         HashMap<Mentee, ArrayList<Mentor>> menteePreferences = new HashMap<>();
         HashMap<Mentor, ArrayList<Mentee>> mentorPreferences = new HashMap<>();
@@ -65,7 +65,7 @@ public class MatchingAlgorithm {
             }
         }
 
-        return writeToJson(mentees);
+        return mentees;
     }
 
     /**
@@ -141,7 +141,7 @@ public class MatchingAlgorithm {
     public static String match(String json) {
         Map.Entry<ArrayList<Mentor>, ArrayList<Mentee>> inputs = fetchMentorsFromJson(json);
 
-        return match(inputs.getKey(), inputs.getValue());
+        return writeToJson(match(inputs.getKey(), inputs.getValue()));
     }
 
     public static void main(String[] args) {
