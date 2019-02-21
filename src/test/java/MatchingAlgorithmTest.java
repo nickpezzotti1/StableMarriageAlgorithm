@@ -10,42 +10,36 @@ public class MatchingAlgorithmTest {
 
     @Test
     public void test3Mentors4Mentees() {
-        String jsonRequestBody = null;
-        String expectedResponse = null;
-
-        try {
-            jsonRequestBody = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test1/input.txt")));
-            expectedResponse = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test1/expected_output.txt")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals(expectedResponse, MatchingAlgorithm.match(jsonRequestBody));
+        test("src/test/testValues/test1/input.txt", "src/test/testValues/test1/expected_output.txt");
     }
 
     @Test
     public void testEqualNumberOfUsers() {
-        String jsonRequestBody = null;
-        String expectedResponse = null;
-
-        try {
-            jsonRequestBody = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test2/input.txt")));
-            expectedResponse = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test2/expected_output.txt")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals(expectedResponse, MatchingAlgorithm.match(jsonRequestBody));
+        test("src/test/testValues/test2/input.txt", "src/test/testValues/test2/expected_output.txt");
     }
 
     @Test
     public void testConfigParameters() {
+        test("src/test/testValues/test3/input.txt", "src/test/testValues/test3/expected_output.txt");
+    }
+
+    @Test
+    public void testHobbies() {
+        test("src/test/testValues/test4/input.txt", "src/test/testValues/test4/expected_output.txt");
+    }
+
+    @Test
+    public void testInterests() {
+        test("src/test/testValues/test5/input.txt", "src/test/testValues/test5/expected_output.txt");
+    }
+
+    private void test(String json_input_file_path, String json_expected_output_file_path) {
         String jsonRequestBody = null;
         String expectedResponse = null;
 
         try {
-            jsonRequestBody = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test3/input.txt")));
-            expectedResponse = String.join("\n", Files.readAllLines(Paths.get("src/test/testValues/test3/expected_output.txt")));
+            jsonRequestBody = String.join("\n", Files.readAllLines(Paths.get(json_input_file_path)));
+            expectedResponse = String.join("\n", Files.readAllLines(Paths.get(json_expected_output_file_path)));
         } catch (IOException e) {
             e.printStackTrace();
         }
