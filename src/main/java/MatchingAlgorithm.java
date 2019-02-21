@@ -89,9 +89,9 @@ public class MatchingAlgorithm {
         return json;
     }
 
-    private static Mentee getFirstAvailableMentee(Set<Mentee> mentors) {
-        for (Mentee mentor : mentors) {
-            if (!mentor.hasMentor()) return mentor;
+    private static Mentee getFirstAvailableMentee(Set<Mentee> mentees) {
+        for (Mentee mentee : mentees) {
+            if (!mentee.hasMentor()) return mentee;
         }
         System.out.println("Mentors expired");
         return null;
