@@ -118,10 +118,13 @@ public class MatchingAlgorithm {
         List<Map> mentorsJson = (List) jsonRootObject.get("mentors");
         ArrayList<Mentor> mentors = new ArrayList<>();
         for (Map mentor : mentorsJson) {
-            Mentor newMentor = new Mentor(((Number) mentor.get("age")).intValue(),
-                    (boolean) mentor.getOrDefault("isMale", false),
+            Mentor newMentor = new Mentor(
                     mentor.get("ID").toString(),
-                    ((Number) mentor.getOrDefault("menteeLimit", 1)).intValue());
+                    ((Number) mentor.getOrDefault("menteeLimit", 1)).intValue(),
+                    ((Number) mentor.get("age")).intValue(),
+                    (Boolean) mentor.getOrDefault("isMale", null),
+                    (List<String>) mentor.get("hobbies"),
+                    (List<String>) mentor.get("interests"));
             mentors.add(newMentor);
         }
 
@@ -129,9 +132,11 @@ public class MatchingAlgorithm {
         List<Map> menteeJson = (List) jsonRootObject.get("mentees");
         ArrayList<Mentee> mentees = new ArrayList<>();
         for (Map mentee : menteeJson) {
-            Mentee newMentee = new Mentee(((Number) mentee.get("age")).intValue(),
-                    (boolean) mentee.get("isMale"),
-                    (mentee.get("ID").toString()));
+            Mentee newMentee = new Mentee(mentee.get("ID").toString(),
+                    ((Number) mentee.get("age")).intValue(),
+                    (Boolean) mentee.getOrDefault("isMale", null),
+                    (List<String>) mentee.get("hobbies"),
+                    (List<String>) mentee.get("interests"));
             mentees.add(newMentee);
         }
 

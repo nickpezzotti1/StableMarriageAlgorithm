@@ -1,9 +1,11 @@
+import java.util.List;
+
 public class Mentee extends User {
 
     protected Mentor mentor; // this value is assigned from the algorithm
 
-    public Mentee(int age, boolean isMale, String id) {
-        super(age, isMale, id);
+    public Mentee(String id, Integer age, Boolean isMale, List<String> hobbies, List<String> interests) {
+        super(id, age, isMale, hobbies, interests);
     }
 
     public Mentor getMentor() {

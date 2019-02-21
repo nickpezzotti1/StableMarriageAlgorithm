@@ -1,7 +1,10 @@
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,29 +14,10 @@ public class AWSLambdaHook implements RequestHandler<Object, String> {
     public String handleRequest(Object input, Context context) {
         context.getLogger().log("Input: " + input);
 
-        Map root = (Map) input;
-        // get mentors
-        List<Map> mentorsJson = (List) root.get("mentors");
-        ArrayList<Mentor> mentors = new ArrayList<>();
-        for (Map mentor : mentorsJson) {
-            Mentor newMentor = new Mentor(((Number) mentor.get("age")).intValue(),
-                    (boolean) mentor.getOrDefault("isMale", false),
-                    mentor.get("ID").toString(),
-                    ((Number) mentor.getOrDefault("menteeLimit", 1)).intValue());
-            mentors.add(newMentor);
-        }
+        Gson gson = new Gson();
+        String json = gson.toJson(input);
 
-        // get mentees
-        List<Map> menteeJson = (List) root.get("mentees");
-        ArrayList<Mentee> mentees = new ArrayList<>();
-        for (Map mentee : menteeJson) {
-            Mentee newMentee = new Mentee(((Number) mentee.get("age")).intValue(),
-                    (boolean) mentee.get("isMale"),
-                    mentee.get("ID").toString());
-            mentees.add(newMentee);
-        }
-
-        return MatchingAlgorithm.match(mentors, mentees);
+        return MatchingAlgorithm.match(json);
     }
 
 }
