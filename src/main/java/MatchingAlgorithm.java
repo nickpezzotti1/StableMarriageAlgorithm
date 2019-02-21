@@ -43,7 +43,7 @@ public class MatchingAlgorithm {
             mentorPreferences.put(mentor, preferences);
         }
 
-        while(existFreeMentees(menteePreferences)){ // looping until proposers exist
+        while(existFreeMentees(menteePreferences.keySet())){ // looping until proposers exist
             Mentee proposer = getFirstAvailableMentee(menteePreferences.keySet());
 
             for (int i = 0; i < menteePreferences.get(proposer).size(); i++) {
@@ -91,7 +91,7 @@ public class MatchingAlgorithm {
 
     /**
      * Get the first available mentee that hasn't been matched to a mentor
-     * @param mentees The list of mentees
+     * @param mentees A set of the mentees
      * @return The mentee which hasn't been matched - or null if all mentees are matched
      */
     private static Mentee getFirstAvailableMentee(Set<Mentee> mentees) {
@@ -103,13 +103,12 @@ public class MatchingAlgorithm {
     }
 
     /**
-     * TODO: abstract menteePreferences parameter (into keyset?)
      * Check if there is a mentee that does not have a mentor assigned
-     * @param menteePreferences A hashmap containing mentees and a list of their preferred mentors
-     * @return true if a mentee is not matched
+     * @param mentees A set of the mentees
+     * @return true if a mentee is not matched otherwise false
      */
-    private static boolean existFreeMentees(HashMap<Mentee, ArrayList<Mentor>> menteePreferences) {
-        for (Mentee mentee : menteePreferences.keySet()) {
+    private static boolean existFreeMentees(Set<Mentee> mentees) {
+        for (Mentee mentee : mentees) {
             if (!mentee.hasMentor()) {
                 return true;
             }
