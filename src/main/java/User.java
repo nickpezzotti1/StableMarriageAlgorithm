@@ -1,6 +1,6 @@
 /**
  * This class represents the general user. It will always be one of two types:
- * Mentor or Mentee, and therefore cannot be instatiated. This hierarchy is built
+ * Mentor or Mentee, and therefore cannot be instantiated. This hierarchy is built
  * to be highly maintainable, to allow for changing requirements and specifications
  * regarding the data we collect on the user.
  * The get score class can be move to the subclasses if we desire to have asymmetrical

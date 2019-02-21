@@ -89,14 +89,25 @@ public class MatchingAlgorithm {
         return json;
     }
 
+    /**
+     * Get the first available mentee that hasn't been matched to a mentor
+     * @param mentees The list of mentees
+     * @return The mentee which hasn't been matched - or null if all mentees are matched
+     */
     private static Mentee getFirstAvailableMentee(Set<Mentee> mentees) {
         for (Mentee mentee : mentees) {
             if (!mentee.hasMentor()) return mentee;
         }
-        System.out.println("Mentors expired");
+        System.out.println("Mentees expired");
         return null;
     }
 
+    /**
+     * TODO: abstract menteePreferences parameter (into keyset?)
+     * Check if there is a mentee that does not have a mentor assigned
+     * @param menteePreferences A hashmap containing mentees and a list of their preferred mentors
+     * @return true if a mentee is not matched
+     */
     private static boolean existFreeMentees(HashMap<Mentee, ArrayList<Mentor>> menteePreferences) {
         for (Mentee mentee : menteePreferences.keySet()) {
             if (!mentee.hasMentor()) {
@@ -108,8 +119,9 @@ public class MatchingAlgorithm {
 
     /**
      * TODO checking data format (mentee limit > 0), make required fields and not required
-     * @param json
-     * @return
+     * Deserialise a json formatted string containing data for mentees and mentors
+     * @param json A json formatted string containing the mentee/mentor data
+     * @return a map entry of ArrayLists: key - mentors, value - mentees
      */
     private static Map.Entry<ArrayList<Mentor>, ArrayList<Mentee>> fetchMentorsFromJson(String json) {
         Map jsonRootObject = new Gson().fromJson(json, Map.class);
@@ -138,6 +150,11 @@ public class MatchingAlgorithm {
         return new AbstractMap.SimpleEntry<>(mentors, mentees);
     }
 
+    /**
+     * Match mentors to their mentees based on the json data provided
+     * @param json A json formatted list of mentors and mentees with their information
+     * @return A json formatted list of mentor-mentee assignments, paired by id
+     */
     public static String match(String json) {
         Map.Entry<ArrayList<Mentor>, ArrayList<Mentee>> inputs = fetchMentorsFromJson(json);
 
