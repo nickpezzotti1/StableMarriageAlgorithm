@@ -7,10 +7,15 @@ import java.util.*;
 public class MatchingAlgorithm {
     // these values are tuned to adjust importance give to parameters.
     // The following are the default values if none are specified
-    public static int AGE_WEIGHT = 1;
-    public static int SEX_WEIGHT = 10;
-    public static int HOBBY_WEIGHT = 5;
-    public static int INTEREST_WEIGHT = 5;
+    public static final int AGE_WEIGHT = 1;
+    public static final int SEX_WEIGHT = 10;
+    public static final int HOBBY_WEIGHT = 5;
+    public static final int INTEREST_WEIGHT = 5;
+
+    public static int ageWeight = AGE_WEIGHT;
+    public static int sexWeight = SEX_WEIGHT;
+    public static int hobbyWeight = HOBBY_WEIGHT;
+    public static int interestWeight = INTEREST_WEIGHT;
 
     /**
      * Computation of the stable marriage algorithm. It is an adapted variant of
@@ -165,25 +170,25 @@ public class MatchingAlgorithm {
             Number interests_importance = (Number) ((Map) jsonRootObject.get("configurations")).get("interests_importance");
 
             if (sex_importance != null) {
-                SEX_WEIGHT = sex_importance.intValue();
+                sexWeight = sex_importance.intValue();
             }
 
             if (age_importance != null) {
-                AGE_WEIGHT = age_importance.intValue();
+                ageWeight = age_importance.intValue();
             }
 
             if (hobbies_importance != null) {
-                HOBBY_WEIGHT = hobbies_importance.intValue();
+                hobbyWeight = hobbies_importance.intValue();
             }
 
             if (interests_importance != null) {
-                INTEREST_WEIGHT = interests_importance.intValue();
+                interestWeight = interests_importance.intValue();
             }
         } else { // set them to default
-            AGE_WEIGHT = 1;
-            SEX_WEIGHT = 10;
-            HOBBY_WEIGHT = 5;
-            INTEREST_WEIGHT = 5;
+            ageWeight = 1;
+            sexWeight = 10;
+            hobbyWeight = 5;
+            interestWeight = 5;
         }
 
         return new AbstractMap.SimpleEntry<>(mentors, mentees);

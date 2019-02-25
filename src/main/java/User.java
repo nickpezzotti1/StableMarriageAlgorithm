@@ -49,22 +49,22 @@ abstract public class User {
 
         // if the age is similiar
         if (age != null) {
-            score += -(Math.abs(age - other.getAge())) * MatchingAlgorithm.AGE_WEIGHT;
+            score += -(Math.abs(age - other.getAge())) * MatchingAlgorithm.ageWeight;
         }
 
         // if they identify as the same gender
         if (isMale != null && isMale == other.isMale()) {
-            score += MatchingAlgorithm.SEX_WEIGHT;
+            score += MatchingAlgorithm.sexWeight;
         }
 
         // if they share common hobbies
         for (String hobby : hobbies) {
-            if (other.getHobbies().contains(hobby)) score += MatchingAlgorithm.HOBBY_WEIGHT;
+            if (other.getHobbies().contains(hobby)) score += MatchingAlgorithm.hobbyWeight;
         }
 
         // if they share interests
         for (String interest : interests) {
-            if (other.getInterests().contains(interest)) score += MatchingAlgorithm.INTEREST_WEIGHT;
+            if (other.getInterests().contains(interest)) score += MatchingAlgorithm.interestWeight;
         }
 
         return score;
