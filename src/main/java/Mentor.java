@@ -51,4 +51,8 @@ public class Mentor extends User {
     public boolean isNotFull() {
         return mentees.size() < menteeLimit;
     }
+
+    public int getMenteeLimit() {
+        return menteeLimit;
+    }
 }

@@ -31,6 +31,8 @@ public class MatchingAlgorithm {
         // initialize preferences
         HashMap<Mentee, ArrayList<Mentor>> menteePreferences = new HashMap<>();
         HashMap<Mentor, ArrayList<Mentee>> mentorPreferences = new HashMap<>();
+        removeRandomExtraMentees(mentors, mentees);
+
 
         // generate preferences for mentees
         for (Mentee mentee : mentees) {
@@ -77,6 +79,22 @@ public class MatchingAlgorithm {
         }
 
         return mentees;
+    }
+
+    private static void removeRandomExtraMentees(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
+        // If there are more mentees than mentors then some at random will be left out
+        int totalNumberOfMenteePlaces = 0;
+        for (Mentor mentor : mentors) {
+            totalNumberOfMenteePlaces += mentor.getMenteeLimit();
+        }
+
+        if (totalNumberOfMenteePlaces < mentees.size()) {
+            Collections.shuffle(mentees);
+            int numberOfMenteesThatWillBeUnassigned = mentees.size() - totalNumberOfMenteePlaces;
+            for (int i = 0; i < numberOfMenteesThatWillBeUnassigned; i++) {
+                mentees.remove(0);
+            }
+        }
     }
 
     /**
