@@ -38,6 +38,11 @@ public class MatchingAlgorithmTest {
         test("src/test/testValues/test6/input.txt", "src/test/testValues/test6/expected_output.txt");
     }
 
+    @Test(timeout=2500)
+    public void test4Mentors3Mentees() {
+        test("src/test/testValues/test7/input.txt", "src/test/testValues/test7/expected_output.txt");
+    }
+
     private void test(String json_input_file_path, String json_expected_output_file_path) {
         String jsonRequestBody = null;
         String expectedResponse = null;
