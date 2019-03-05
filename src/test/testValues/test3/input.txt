@@ -8,13 +8,13 @@
       "ID": "same_age",
       "age": 18,
       "isMale": false,
-      "menteeLimit": 1
+      "partner_limit": 1
     },
     {
       "ID": "same_gender",
       "age": 0,
       "isMale": true,
-      "menteeLimit": 1
+      "partner_limit": 1
     }
   ],
   "mentees": [

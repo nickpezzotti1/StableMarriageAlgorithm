@@ -4,19 +4,19 @@
       "ID": "k1",
       "age": 20,
       "isMale": true,
-      "menteeLimit": 1
+      "partner_limit": 1
     },
     {
       "ID": "k4",
       "age": 15,
       "isMale": true,
-      "menteeLimit": 1
+      "partner_limit": 1
     },
     {
       "ID": "k5",
       "age": 10,
       "isMale": true,
-      "menteeLimit": 1
+      "partner_limit": 1
     }
   ],
   "mentees": [
@@ -33,7 +33,8 @@
     {
       "ID": "k876",
       "age": 20,
-      "isMale": true
+      "isMale": true,
+      "partner_limit": 1
     }
   ]
 }

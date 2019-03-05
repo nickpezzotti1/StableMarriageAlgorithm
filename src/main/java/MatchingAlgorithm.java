@@ -188,7 +188,7 @@ public class MatchingAlgorithm {
                     (Boolean) mentor.get("isMale"),
                     (List<String>) mentor.get("hobbies"),
                     (List<String>) mentor.get("interests"),
-                    ((Number) mentor.getOrDefault("menteeLimit", 1)).intValue());
+                    ((Number) mentor.getOrDefault("partner_limit", 1)).intValue());
             mentors.add(newUser);
         }
 
@@ -201,7 +201,7 @@ public class MatchingAlgorithm {
                     (Boolean) mentee.get("isMale"),
                     (List<String>) mentee.get("hobbies"),
                     (List<String>) mentee.get("interests"),
-                    ((Number) mentee.getOrDefault("menteeLimit", 1)).intValue());
+                    ((Number) mentee.getOrDefault("partner_limit", 1)).intValue());
             mentees.add(newUser);
         }
 
