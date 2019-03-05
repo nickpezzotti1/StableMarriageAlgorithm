@@ -5,18 +5,12 @@
       "name": "name1",
       "age": 20,
       "isMale": true,
-      "menteeLimit": 2
+      "menteeLimit": 1
     },
     {
       "ID": "k1",
       "name": "name1",
-      "age": 15,
-      "isMale": true
-    },
-    {
-      "ID": "k2",
-      "name": "name2",
-      "age": 10,
+      "age": 17,
       "isMale": true
     }
   ],
@@ -25,30 +19,6 @@
       "ID": "k3",
       "name": "name1",
       "age": 18,
-      "last name": "lastname2",
-      "specialization": "AI",
-      "isMale": true
-    },
-    {
-      "ID": "k4",
-      "name": "name1",
-      "age": 19,
-      "last name": "lastname2",
-      "specialization": "AI",
-      "isMale": true
-    },
-    {
-      "ID": "k5",
-      "name": "name1",
-      "age": 12,
-      "last name": "lastname2",
-      "specialization": "AI",
-      "isMale": true
-    },
-    {
-      "ID": "k6",
-      "name": "name1",
-      "age": 10,
       "last name": "lastname2",
       "specialization": "AI",
       "isMale": true

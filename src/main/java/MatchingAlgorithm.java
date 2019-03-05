@@ -7,10 +7,10 @@ import java.util.*;
 public class MatchingAlgorithm {
     // these values are tuned to adjust importance give to parameters.
     // The following are the default values if none are specified
-    public static final int AGE_WEIGHT = 1;
-    public static final int SEX_WEIGHT = 10;
-    public static final int HOBBY_WEIGHT = 5;
-    public static final int INTEREST_WEIGHT = 5;
+    private static final int AGE_WEIGHT = 1;
+    private static final int SEX_WEIGHT = 10;
+    private static final int HOBBY_WEIGHT = 5;
+    private static final int INTEREST_WEIGHT = 5;
 
     public static int ageWeight = AGE_WEIGHT;
     public static int sexWeight = SEX_WEIGHT;
@@ -18,26 +18,35 @@ public class MatchingAlgorithm {
     public static int interestWeight = INTEREST_WEIGHT;
 
     /**
+     * Match mentors to their mentees based on the json data provided via the API
+     *
+     * @param json A json formatted list of mentors and mentees with their information
+     * @return A json formatted list of mentor-mentee assignments, paired by id
+     */
+    public static String match(String json) {
+        Map.Entry<ArrayList<User>, ArrayList<User>> inputs = fetchUsersFromJson(json);
+
+        return writeToJson(performMatch(inputs.getKey(), inputs.getValue()));
+    }
+
+    /**
      * Computation of the stable marriage algorithm. It is an adapted variant of
      * the Gale-Shapely algorithm to allow one woman to accept multiple men (one
      * mentor can accept multiple mentees).
-     *
-     * TODO ASSUMPTIONS:
-     *      - more mentors than mentees
+     * 
      * @param mentors The men in the algorithm.
      * @param mentees The women.
      */
-    private static ArrayList<Mentee> performMatch(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
+    private static ArrayList<User> performMatch(ArrayList<User> mentors, ArrayList<User> mentees) {
         // initialize preferences
-        HashMap<Mentee, ArrayList<Mentor>> menteePreferences = new HashMap<>();
-        HashMap<Mentor, ArrayList<Mentee>> mentorPreferences = new HashMap<>();
-        removeRandomExtraMentees(mentors, mentees);
-
+        HashMap<User, ArrayList<User>> menteePreferences = new HashMap<>();
+        HashMap<User, ArrayList<User>> mentorPreferences = new HashMap<>();
+        removeRandomExtraUsers(mentors, mentees);
 
         // generate preferences for mentees
-        for (Mentee mentee : mentees) {
-            ArrayList<Mentor> preferences = new ArrayList<>();
-            for (Mentor mentor : mentors) {
+        for (User mentee : mentees) {
+            ArrayList<User> preferences = new ArrayList<>();
+            for (User mentor : mentors) {
                 preferences.add(mentor);
             }
             preferences.sort((a, b) -> ((Integer)mentee.getScore(b)).compareTo((mentee.getScore(a))));
@@ -46,9 +55,9 @@ public class MatchingAlgorithm {
         }
 
         //generate preferences for mentors
-        for (Mentor mentor : mentors) {
-            ArrayList<Mentee> preferences = new ArrayList<>();
-            for (Mentee mentee : mentees) {
+        for (User mentor : mentors) {
+            ArrayList<User> preferences = new ArrayList<>();
+            for (User mentee : mentees) {
                 preferences.add(mentee);
             }
             preferences.sort((a, b) -> ((Integer)mentor.getScore(b)).compareTo((mentor.getScore(a))));
@@ -56,23 +65,18 @@ public class MatchingAlgorithm {
             mentorPreferences.put(mentor, preferences);
         }
 
-        while(existFreeMentees(menteePreferences.keySet())){ // looping until proposers exist
-            Mentee proposer = getFirstAvailableMentee(menteePreferences.keySet());
+        while(existFreeUsers(menteePreferences.keySet())){ // looping until proposers exist
+            User proposer = getFirstAvailableUser(menteePreferences.keySet());
 
             for (int i = 0; i < menteePreferences.get(proposer).size(); i++) {
-                Mentor candidate = menteePreferences.get(proposer).get(i);
+                User candidate = menteePreferences.get(proposer).get(i);
 
-                 if (candidate.isNotFull()) {
-                    candidate.addMentee(proposer);
-                    proposer.setMentor(candidate);
+                 if (!candidate.isFull()) {
+                    proposer.engage(candidate);
                     break;
-                } else if (candidate.prefersToLeastWantedMentee(proposer)) {
-                    candidate.getLeastPreferredMentee().setMentor(null); // unengage
-
-                    candidate.removeLeastPreferredMentee();
-
-                    candidate.addMentee(proposer);
-                    proposer.setMentor(candidate);
+                } else if (candidate.prefersToLeastWantedPartner(proposer)) {
+                    candidate.disengage(candidate.getLeastPreferredPartner());
+                    proposer.engage(candidate);
                     break;
                 }
             }
@@ -81,18 +85,37 @@ public class MatchingAlgorithm {
         return mentees;
     }
 
-    private static void removeRandomExtraMentees(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
+    /**
+     * If there are an uneven of number of mentors or mentees, the input has to be cleaned.
+     * Some mentors/mentees will be removed at random.
+     */
+    private static void removeRandomExtraUsers(ArrayList<User> mentors, ArrayList<User> mentees) {
         // If there are more mentees than mentors then some at random will be left out
-        int totalNumberOfMenteePlaces = 0;
-        for (Mentor mentor : mentors) {
-            totalNumberOfMenteePlaces += mentor.getMenteeLimit();
+        int netUserCount = 0;
+        for (User mentor : mentors) {
+            netUserCount += mentor.getPartnerLimit();
         }
 
-        if (totalNumberOfMenteePlaces < mentees.size()) {
+        for (User mentee : mentees) {
+            netUserCount -= mentee.getPartnerLimit();
+        }
+
+
+        if (netUserCount < 0) {
             Collections.shuffle(mentees);
-            int numberOfMenteesThatWillBeUnassigned = mentees.size() - totalNumberOfMenteePlaces;
-            for (int i = 0; i < numberOfMenteesThatWillBeUnassigned; i++) {
-                mentees.remove(0);
+
+            int i = 0;
+            while (netUserCount != 0 && mentees.size() > i) {
+                User mentee = mentees.get(i);
+                int numberOfPlacesRemoving = Math.min(mentee.getPartnerLimit() - 1, netUserCount*-1);
+                mentee.setPartnerLimit(mentee.getPartnerLimit() - numberOfPlacesRemoving);
+                netUserCount += numberOfPlacesRemoving;
+                if (mentee.getPartnerLimit() == 0) mentees.remove(mentee);;
+                i++;
+            }
+
+            for (int k = netUserCount; k < 0; k++) {
+                mentees.remove(-1*k);
             }
         }
     }
@@ -102,13 +125,15 @@ public class MatchingAlgorithm {
      * @param mentees the list of all mentees to be matched
      * @return a string of the json formatted pairs
      */
-    private static String writeToJson(ArrayList<Mentee> mentees) {
+    private static String writeToJson(ArrayList<User> mentees) {
         String json = "{ \"assignments\": [ ";
-        for (Mentee mentee : mentees) {
-            json += "{ ";
-            json += "\"mentee_id\": \"" + mentee.getId() + "\", ";
-            json += "\"mentor_id\": \"" + mentee.getMentor().getId();
-            json += "\"}, ";
+        for (User mentee : mentees) {
+            for (User partner : mentee.getPartners()) {
+                json += "{ ";
+                json += "\"mentee_id\": \"" + mentee.getId() + "\", ";
+                json += "\"mentor_id\": \"" + partner.getId();
+                json += "\"}, ";
+            }
         }
 
         // remove trailing comma
@@ -123,12 +148,11 @@ public class MatchingAlgorithm {
      * @param mentees A set of the mentees
      * @return The mentee which hasn't been matched - or null if all mentees are matched
      */
-    private static Mentee getFirstAvailableMentee(Set<Mentee> mentees) {
-        for (Mentee mentee : mentees) {
-            if (!mentee.hasMentor()) return mentee;
+    private static User getFirstAvailableUser(Set<User> mentees) {
+        for (User mentee : mentees) {
+            if (!mentee.isFull()) return mentee;
         }
-        System.out.println("Mentees expired");
-        return null;
+        throw new Error("Unreachable statement");
     }
 
     /**
@@ -136,9 +160,9 @@ public class MatchingAlgorithm {
      * @param mentees A set of the mentees
      * @return true if a mentee is not matched otherwise false
      */
-    private static boolean existFreeMentees(Set<Mentee> mentees) {
-        for (Mentee mentee : mentees) {
-            if (!mentee.hasMentor()) {
+    private static boolean existFreeUsers(Set<User> mentees) {
+        for (User user : mentees) {
+            if (!user.isFull()) {
                 return true;
             }
         }
@@ -151,33 +175,34 @@ public class MatchingAlgorithm {
      * @param json A json formatted string containing the mentee/mentor data
      * @return a map entry of ArrayLists: key - mentors, value - mentees
      */
-    private static Map.Entry<ArrayList<Mentor>, ArrayList<Mentee>> fetchMentorsFromJson(String json) {
+    private static Map.Entry<ArrayList<User>, ArrayList<User>> fetchUsersFromJson(String json) {
         Map jsonRootObject = new Gson().fromJson(json, Map.class);
 
         // get mentors
         List<Map> mentorsJson = (List) jsonRootObject.get("mentors");
-        ArrayList<Mentor> mentors = new ArrayList<>();
+        ArrayList<User> mentors = new ArrayList<>();
         for (Map mentor : mentorsJson) {
-            Mentor newMentor = new Mentor(
+            User newUser = new User(
                     mentor.get("ID").toString(),
-                    ((Number) mentor.getOrDefault("menteeLimit", 1)).intValue(),
                     ((Number) mentor.get("age")).intValue(),
                     (Boolean) mentor.get("isMale"),
                     (List<String>) mentor.get("hobbies"),
-                    (List<String>) mentor.get("interests"));
-            mentors.add(newMentor);
+                    (List<String>) mentor.get("interests"),
+                    ((Number) mentor.getOrDefault("menteeLimit", 1)).intValue());
+            mentors.add(newUser);
         }
 
         // get mentees
         List<Map> menteeJson = (List) jsonRootObject.get("mentees");
-        ArrayList<Mentee> mentees = new ArrayList<>();
+        ArrayList<User> mentees = new ArrayList<>();
         for (Map mentee : menteeJson) {
-            Mentee newMentee = new Mentee(mentee.get("ID").toString(),
+            User newUser = new User(mentee.get("ID").toString(),
                     ((Number) mentee.get("age")).intValue(),
                     (Boolean) mentee.get("isMale"),
                     (List<String>) mentee.get("hobbies"),
-                    (List<String>) mentee.get("interests"));
-            mentees.add(newMentee);
+                    (List<String>) mentee.get("interests"),
+                    ((Number) mentee.getOrDefault("menteeLimit", 1)).intValue());
+            mentees.add(newUser);
         }
 
         // parsing the config options
@@ -203,33 +228,12 @@ public class MatchingAlgorithm {
                 interestWeight = interests_importance.intValue();
             }
         } else { // set them to default
-            ageWeight = 1;
-            sexWeight = 10;
-            hobbyWeight = 5;
-            interestWeight = 5;
+            ageWeight = AGE_WEIGHT;
+            sexWeight = SEX_WEIGHT;
+            hobbyWeight = HOBBY_WEIGHT;
+            interestWeight = INTEREST_WEIGHT;
         }
 
         return new AbstractMap.SimpleEntry<>(mentors, mentees);
-    }
-
-    /**
-     * Match mentors to their mentees based on the json data provided
-     * @param json A json formatted list of mentors and mentees with their information
-     * @return A json formatted list of mentor-mentee assignments, paired by id
-     */
-    public static String match(String json) {
-        Map.Entry<ArrayList<Mentor>, ArrayList<Mentee>> inputs = fetchMentorsFromJson(json);
-
-        return writeToJson(performMatch(inputs.getKey(), inputs.getValue()));
-    }
-
-    /**
-     * Match mentors to their mentees based on the data provided in the ArrayLists
-     * @param mentors the mentors to be matched
-     * @param mentees the mentees to be matched
-     * @return A json formatted list of mentor-mentee assignments, paired by id
-     */
-    public static String match(ArrayList<Mentor> mentors, ArrayList<Mentee> mentees) {
-        return writeToJson(performMatch(mentors, mentees));
     }
 }
