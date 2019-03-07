@@ -1,6 +1,6 @@
 {
   "configurations": {
-    "sex_importance": 100,
+    "gender_importance": 100,
     "age_importance": 1
   },
   "mentors": [

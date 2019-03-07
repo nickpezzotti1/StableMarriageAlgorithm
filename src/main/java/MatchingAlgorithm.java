@@ -207,13 +207,13 @@ public class MatchingAlgorithm {
 
         // parsing the config options
         if (jsonRootObject.get("configurations") != null) {
-            Number sex_importance = (Number) ((Map) jsonRootObject.get("configurations")).get("sex_importance");
+            Number gender_importance = (Number) ((Map) jsonRootObject.get("configurations")).get("gender_importance");
             Number age_importance = (Number) ((Map) jsonRootObject.get("configurations")).get("age_importance");
             Number hobbies_importance = (Number) ((Map) jsonRootObject.get("configurations")).get("hobbies_importance");
             Number interests_importance = (Number) ((Map) jsonRootObject.get("configurations")).get("interests_importance");
 
-            if (sex_importance != null) {
-                sexWeight = sex_importance.intValue();
+            if (gender_importance != null) {
+                sexWeight = gender_importance.intValue();
             }
 
             if (age_importance != null) {
