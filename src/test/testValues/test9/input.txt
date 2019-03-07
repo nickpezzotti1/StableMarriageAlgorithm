@@ -1,0 +1,512 @@
+{
+  "configurations": {
+    "gender_importance": 100,
+    "age_importance": 1
+  },
+  "mentors": [
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 18,
+      "gender": "Female",
+      "partner_limit": 1
+    },
+    {
+      "ID": "same_gender",
+      "age": 0,
+      "gender": "Male",
+      "partner_limit": 1
+    }
+  ],
+  "mentees": [
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+{
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    },
+    {
+      "ID": "k98",
+      "age": 18,
+      "gender": "Male"
+    }
+  ]
+}
