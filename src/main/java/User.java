@@ -63,7 +63,6 @@ public class User {
 
         // if they identify as the same gender
         if (gender != null && gender.equalsIgnoreCase(other.getGender())) {
-            System.out.println(gender + " " + other.getGender());
             score += MatchingAlgorithm.sexWeight;
         }
 
