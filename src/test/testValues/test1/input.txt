@@ -4,20 +4,20 @@
       "ID": "k0",
       "name": "name1",
       "age": 20,
-      "isMale": true,
+      "gender": "Male",
       "partner_limit": 2
     },
     {
       "ID": "k1",
       "name": "name1",
       "age": 15,
-      "isMale": true
+      "gender": "Male"
     },
     {
       "ID": "k2",
       "name": "name2",
       "age": 10,
-      "isMale": true
+      "gender": "Male"
     }
   ],
   "mentees": [
@@ -27,7 +27,7 @@
       "age": 18,
       "last name": "lastname2",
       "specialization": "AI",
-      "isMale": true
+      "gender": "Male"
     },
     {
       "ID": "k4",
@@ -35,7 +35,7 @@
       "age": 19,
       "last name": "lastname2",
       "specialization": "AI",
-      "isMale": true
+      "gender": "Male"
     },
     {
       "ID": "k5",
@@ -43,7 +43,7 @@
       "age": 12,
       "last name": "lastname2",
       "specialization": "AI",
-      "isMale": true
+      "gender": "Male"
     },
     {
       "ID": "k6",
@@ -51,7 +51,7 @@
       "age": 10,
       "last name": "lastname2",
       "specialization": "AI",
-      "isMale": true
+      "gender": "Male"
     }
   ]
 }

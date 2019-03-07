@@ -12,7 +12,7 @@ import java.util.List;
 public class User {
     protected String id;
     protected Integer age;
-    protected Boolean isMale;
+    protected String gender;
     protected ArrayList<String> hobbies = new ArrayList<>();
     protected ArrayList<String> interests = new ArrayList<>();
     private int partnerLimit; // the number of mentees he can mentor
@@ -24,10 +24,10 @@ public class User {
     // A list of all the mentees the mentor is currently matched with
     private ArrayList<User> partners = new ArrayList<>();
 
-    public User(String id, Integer age, Boolean isMale, List<String> hobbies, List<String> interests, int partnerLimit) {
+    public User(String id, Integer age, String gender, List<String> hobbies, List<String> interests, int partnerLimit) {
         this.id = id;
         this.age = age;
-        this.isMale = isMale;
+        this.gender = gender;
         if (hobbies != null) this.hobbies = new ArrayList<>(hobbies);
         if (interests != null) this.interests = new ArrayList<>(interests);
         this.partnerLimit = partnerLimit;
@@ -41,8 +41,8 @@ public class User {
         return age;
     }
 
-    public boolean isMale() {
-        return isMale;
+    public String getGender() {
+        return gender;
     }
 
     public ArrayList<String> getHobbies() {
@@ -62,7 +62,8 @@ public class User {
         }
 
         // if they identify as the same gender
-        if (isMale != null && isMale == other.isMale()) {
+        if (gender != null && gender.equalsIgnoreCase(other.getGender())) {
+            System.out.println(gender + " " + other.getGender());
             score += MatchingAlgorithm.sexWeight;
         }
 

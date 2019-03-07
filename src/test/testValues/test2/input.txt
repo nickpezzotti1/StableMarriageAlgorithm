@@ -3,19 +3,19 @@
     {
       "ID": "k1",
       "age": 20,
-      "isMale": true,
+      "gender": "Male",
       "partner_limit": 1
     },
     {
       "ID": "k4",
       "age": 15,
-      "isMale": true,
+      "gender": "Male",
       "partner_limit": 1
     },
     {
       "ID": "k5",
       "age": 10,
-      "isMale": true,
+      "gender": "Male",
       "partner_limit": 1
     }
   ],
@@ -23,17 +23,17 @@
     {
       "ID": "k98",
       "age": 18,
-      "isMale": true
+      "gender": "Male"
     },
     {
       "ID": "k987",
       "age": 19,
-      "isMale": true
+      "gender": "Male"
     },
     {
       "ID": "k876",
       "age": 20,
-      "isMale": true,
+      "gender": "Male",
       "partner_limit": 1
     }
   ]

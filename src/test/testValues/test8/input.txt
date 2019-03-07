@@ -4,14 +4,14 @@
       "ID": "k0",
       "name": "name1",
       "age": 20,
-      "isMale": true,
+      "gender": "Male",
       "menteeLimit": 1
     },
     {
       "ID": "k1",
       "name": "name1",
       "age": 17,
-      "isMale": true
+      "gender": "Male"
     }
   ],
   "mentees": [
@@ -22,7 +22,7 @@
       "last name": "lastname2",
       "specialization": "AI",
       "partner_limit": 2,
-      "isMale": true
+      "gender": "Male"
     }
   ]
 }

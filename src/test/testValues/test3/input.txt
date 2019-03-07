@@ -1,19 +1,19 @@
 {
   "configurations": {
     "sex_importance": 100,
-    "age_importance": 0
+    "age_importance": 1
   },
   "mentors": [
     {
       "ID": "same_age",
       "age": 18,
-      "isMale": false,
+      "gender": "Female",
       "partner_limit": 1
     },
     {
       "ID": "same_gender",
       "age": 0,
-      "isMale": true,
+      "gender": "Male",
       "partner_limit": 1
     }
   ],
@@ -21,7 +21,7 @@
     {
       "ID": "k98",
       "age": 18,
-      "isMale": true
+      "gender": "Male"
     }
   ]
 }

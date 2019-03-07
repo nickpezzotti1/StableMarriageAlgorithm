@@ -185,7 +185,7 @@ public class MatchingAlgorithm {
             User newUser = new User(
                     mentor.get("ID").toString(),
                     ((Number) mentor.get("age")).intValue(),
-                    (Boolean) mentor.get("isMale"),
+                    (String) mentor.getOrDefault("gender", null),
                     (List<String>) mentor.get("hobbies"),
                     (List<String>) mentor.get("interests"),
                     ((Number) mentor.getOrDefault("partner_limit", 1)).intValue());
@@ -198,7 +198,7 @@ public class MatchingAlgorithm {
         for (Map mentee : menteeJson) {
             User newUser = new User(mentee.get("ID").toString(),
                     ((Number) mentee.get("age")).intValue(),
-                    (Boolean) mentee.get("isMale"),
+                    (String) mentee.getOrDefault("gender", null),
                     (List<String>) mentee.get("hobbies"),
                     (List<String>) mentee.get("interests"),
                     ((Number) mentee.getOrDefault("partner_limit", 1)).intValue());
