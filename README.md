@@ -20,9 +20,9 @@
   "mentors": [
     {
       "ID": "k173131",
-      "menteeLimit": 10,
+      "partner_limit": 10,
       "age": 18,
-      "isMale": false,
+      "gender": "male",
       "interests": ["AI", "Blockchain"],
       "hobbies": ["AI", "Blockchain"]
     }
@@ -31,7 +31,7 @@
     {
       "ID": "k1234121",
       "age": 18,
-      "isMale": false,
+      "gender": "male",
       "interests": ["AI", "Blockchain"],
       "hobbies": ["AI", "Blockchain"]
     }
