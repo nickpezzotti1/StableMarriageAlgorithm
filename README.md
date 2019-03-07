@@ -12,7 +12,7 @@
  ```
  {
   "configurations": {
-    "sex_importance": 100,
+    "gender_importance": 100,
     "age_importance": 1,
     "hobbies_importance": 10,
     "interests_importance": 10
